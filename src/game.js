@@ -1,4 +1,4 @@
-import Board from "board";
+import Board from "app/models/board";
 import Player from "player";
 
 var Game = function() {

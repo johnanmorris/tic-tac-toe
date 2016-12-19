@@ -1,21 +1,25 @@
-import Player from 'player';
+import Player from 'app/models/player';
 
 describe("Player", function() {
-  var noelle = new Player();
+  var player;
+  beforeEach(function(){
+    player = new Player();
+  });
+
   it("must be able to create a new instance of player", function(){
     // To be determined: test Type of / object defined
-    expect(noelle).not.toBe(null);
-    expect(noelle).toBeTruthy();
+    expect(player).not.toBe(null);
+    expect(player).toBeTruthy();
 
   });
 
   it("should have a turn variable defaulted to false", function(){
-    expect(noelle.turn).toBeDefined();
-    expect(noelle.turn).toBe(false);
+    expect(player.get('turn')).toBeDefined();
+    expect(player.get('turn')).toBe(false);
   });
 
   it("should have a mark variable", function() {
-    expect(noelle.mark).toBeDefined();
-    expect(noelle.mark).toBe(null);
+    expect(player.get('mark')).toBeDefined();
+    expect(player.get('mark')).toBe(null);
   });
 });

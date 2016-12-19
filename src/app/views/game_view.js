@@ -1,7 +1,7 @@
 import Backbone from 'backbone';
 import BoardView from 'app/views/board_view';
 
-var ApplicationView = Backbone.View.extend({
+var GameView = Backbone.View.extend({
   initialize: function(){
     this.render();
   },
@@ -28,4 +28,4 @@ var ApplicationView = Backbone.View.extend({
   }
 });
 
-export default ApplicationView;
+export default GameView;
