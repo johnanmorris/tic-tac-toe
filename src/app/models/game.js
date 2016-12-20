@@ -89,7 +89,6 @@ var Game = Backbone.Model.extend({
     } else if (this.winner() === null && this.validSquare(a,b)) {
       // Checking to see whose turn it is.
 
-      console.log("CURRENT MARK: " + this.currentPlayer().get('mark'));
       this.board.grid[a][b] = this.currentPlayer().get('mark');
 
       if(this.winner()) {
