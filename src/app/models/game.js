@@ -7,6 +7,14 @@ var Game = Backbone.Model.extend({
     this.playerOne = new Player({mark: "X", turn: true});
     this.playerTwo = new Player({mark: "O", turn: false});
     this.board = new Board();
+
+    // this.playerOne = new Player();
+    // this.playerTwo = new Player();
+    // this.board = new Board();
+    //
+    // this.playerOne.set("mark", "X");
+    // this.playerTwo.set("mark", "O");
+    // this.playerOne.set("turn", true);
   },
 
   toggleTurn: function() {
@@ -27,19 +35,6 @@ var Game = Backbone.Model.extend({
     }
   },
 
-  playerByMark: function(mark){
-    // A function to determine the player based on the mark
-    if (mark !== "X" && mark !== "O" ){
-      throw new Error("Function only accepts the marks of the players which are passed as strings");
-    }
-
-    if (mark == this.playerOne.get('mark')){
-      return "Player One";
-    } else if (mark == this.playerTwo.get('mark')){
-      return "Player Two";
-    }
-  },
-
   validSquare: function(a, b) {
     var square = this.board.grid[a][b];
 //    console.log("SQUARE >>> " + square);
@@ -55,27 +50,26 @@ var Game = Backbone.Model.extend({
 
     for(var i = 0; i < this.board.grid.length; i++){
       if (this.board.grid[i][0] == this.board.grid[i][1] && this.board.grid[i][0] == this.board.grid[i][2] && this.board.grid[i][0] !== null){
-        return this.playerByMark(this.board.grid[i][0]);
+        return this.board.grid[i][0];
       }
     }
     // VERTICAL WIN
     for(var k = 0; k < this.board.grid[0].length; k++) {
       if (this.board.grid[0][k] == this.board.grid[1][k] && this.board.grid[0][k] == this.board.grid[2][k] && this.board.grid[0][k] !== null){
-        return this.playerByMark(this.board.grid[0][k]);
+        return this.board.grid[0][k];
       }
     }
 
     // DIAGONAL WINS
     if (this.board.grid[0][0] == this.board.grid[1][1] && this.board.grid[0][0] == this.board.grid[2][2] && this.board.grid[1][1] !== null){
-      return this.playerByMark(this.board.grid[1][1]);
+      return this.board.grid[1][1];
     }
     if (this.board.grid[0][2] == this.board.grid[1][1] && this.board.grid[0][2] == this.board.grid[2][0] && this.board.grid[1][1] !== null){
-      return this.playerByMark(this.board.grid[1][1]);
+      return this.board.grid[1][1];
     }
 
     return null;
   },
-
 
   play: function(a,b){
 
@@ -95,7 +89,8 @@ var Game = Backbone.Model.extend({
     } else if (this.winner() === null && this.validSquare(a,b)) {
       // Checking to see whose turn it is.
 
-      this.board.get('grid')[a][b] = this.currentPlayer().mark;
+      console.log("CURRENT MARK: " + this.currentPlayer().get('mark'));
+      this.board.grid[a][b] = this.currentPlayer().get('mark');
 
       if(this.winner()) {
         return "Congratulations, " + this.winner() + " has won!";
