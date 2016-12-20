@@ -13,13 +13,15 @@ describe("Player", function() {
 
   });
 
-  it("should have a turn variable defaulted to false", function(){
-    expect(player.get('turn')).toBeDefined();
-    expect(player.get('turn')).toBe(false);
-  });
+  // I don't think I need these for Backbone anymore
 
-  it("should have a mark variable", function() {
-    expect(player.get('mark')).toBeDefined();
-    expect(player.get('mark')).toBe(null);
-  });
+  // it("should have a turn variable defaulted to false", function(){
+  //   expect(player.get('turn')).toBeDefined();
+  //   expect(player.get('turn')).toBe(false);
+  // });
+  //
+  // it("should have a mark variable", function() {
+  //   expect(player.get('mark')).toBeDefined();
+  //   expect(player.get('mark')).toBe(null);
+  // });
 });
