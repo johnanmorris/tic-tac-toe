@@ -1,7 +1,7 @@
 import Game from 'app/models/game';
 import Board from 'app/models/board';
 
-describe("Game", function(){
+xdescribe("Game", function(){
   var game;
 
   beforeEach(function(){
