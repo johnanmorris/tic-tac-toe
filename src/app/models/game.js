@@ -41,7 +41,7 @@ var Game = Backbone.Model.extend({
   },
 
   validSquare: function(a, b) {
-    var square = this.board.get('grid')[a][b];
+    var square = this.board.grid[a][b];
 //    console.log("SQUARE >>> " + square);
     if(square === null) {
       return true;
@@ -53,24 +53,24 @@ var Game = Backbone.Model.extend({
   winner: function(){
     // FOR THE HORIZONTAL WIN - STILL TO DETERMINE IF WE CNA PUT THIS IN A LOOP VS HARD CODING.
 
-    for(var i = 0; i < this.board.get('grid').length; i++){
-      if (this.board.get('grid')[i][0] == this.board.get('grid')[i][1] && this.board.get('grid')[i][0] == this.board.get('grid')[i][2] && this.board.get('grid')[i][0] !== null){
-        return this.playerByMark(this.board.get('grid')[i][0]);
+    for(var i = 0; i < this.board.grid.length; i++){
+      if (this.board.grid[i][0] == this.board.grid[i][1] && this.board.grid[i][0] == this.board.grid[i][2] && this.board.grid[i][0] !== null){
+        return this.playerByMark(this.board.grid[i][0]);
       }
     }
     // VERTICAL WIN
-    for(var k = 0; k < this.board.get('grid')[0].length; k++) {
-      if (this.board.get('grid')[0][k] == this.board.get('grid')[1][k] && this.board.get('grid')[0][k] == this.board.get('grid')[2][k] && this.board.get('grid')[0][k] !== null){
-        return this.playerByMark(this.board.get('grid')[0][k]);
+    for(var k = 0; k < this.board.grid[0].length; k++) {
+      if (this.board.grid[0][k] == this.board.grid[1][k] && this.board.grid[0][k] == this.board.grid[2][k] && this.board.grid[0][k] !== null){
+        return this.playerByMark(this.board.grid[0][k]);
       }
     }
 
     // DIAGONAL WINS
-    if (this.board.get('grid')[0][0] == this.board.get('grid')[1][1] && this.board.get('grid')[0][0] == this.board.get('grid')[2][2] && this.board.get('grid')[1][1] !== null){
-      return this.playerByMark(this.board.get('grid')[0][0]);
+    if (this.board.grid[0][0] == this.board.grid[1][1] && this.board.grid[0][0] == this.board.grid[2][2] && this.board.grid[1][1] !== null){
+      return this.playerByMark(this.board.grid[1][1]);
     }
-    if (this.board.get('grid')[0][2] == this.board.get('grid')[1][1] && this.board.get('grid')[0][2] == this.board.get('grid')[2][0] && this.board.get('grid')[1][1] !== null){
-      return this.playerByMark(this.board.get('grid')[1][1]);
+    if (this.board.grid[0][2] == this.board.grid[1][1] && this.board.grid[0][2] == this.board.grid[2][0] && this.board.grid[1][1] !== null){
+      return this.playerByMark(this.board.grid[1][1]);
     }
 
     return null;
