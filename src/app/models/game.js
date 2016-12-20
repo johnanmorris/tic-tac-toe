@@ -1,20 +1,11 @@
 import Backbone from 'backbone';
-import Board from 'app/models/board';
 import Player from 'app/models/player';
 
 var Game = Backbone.Model.extend({
   initialize: function(options){
     this.playerOne = new Player({mark: "X", turn: true});
     this.playerTwo = new Player({mark: "O", turn: false});
-    this.board = new Board();
-
-    // this.playerOne = new Player();
-    // this.playerTwo = new Player();
-    // this.board = new Board();
-    //
-    // this.playerOne.set("mark", "X");
-    // this.playerTwo.set("mark", "O");
-    // this.playerOne.set("turn", true);
+    this.board = [ [null,null,null], [null,null,null], [null,null,null]];
   },
 
   toggleTurn: function() {
@@ -36,7 +27,7 @@ var Game = Backbone.Model.extend({
   },
 
   validSquare: function(a, b) {
-    var square = this.board.grid[a][b];
+    var square = this.board[a][b];
 //    console.log("SQUARE >>> " + square);
     if(square === null) {
       return true;
@@ -45,27 +36,38 @@ var Game = Backbone.Model.extend({
     }
   },
 
+  isFull: function(){
+    for(var i = 0; i < this.board.length; i++){
+      for(var j = 0; j < this.board[i].length; j++){
+        if(this.board[i][j] === null){
+          return false;
+        }
+      }
+      return true;
+    }
+  },
+
   winner: function(){
     // FOR THE HORIZONTAL WIN - STILL TO DETERMINE IF WE CNA PUT THIS IN A LOOP VS HARD CODING.
 
-    for(var i = 0; i < this.board.grid.length; i++){
-      if (this.board.grid[i][0] == this.board.grid[i][1] && this.board.grid[i][0] == this.board.grid[i][2] && this.board.grid[i][0] !== null){
-        return this.board.grid[i][0];
+    for(var i = 0; i < this.board.length; i++){
+      if (this.board[i][0] == this.board[i][1] && this.board[i][0] == this.board[i][2] && this.board[i][0] !== null){
+        return this.board[i][0];
       }
     }
     // VERTICAL WIN
-    for(var k = 0; k < this.board.grid[0].length; k++) {
-      if (this.board.grid[0][k] == this.board.grid[1][k] && this.board.grid[0][k] == this.board.grid[2][k] && this.board.grid[0][k] !== null){
-        return this.board.grid[0][k];
+    for(var k = 0; k < this.board[0].length; k++) {
+      if (this.board[0][k] == this.board[1][k] && this.board[0][k] == this.board[2][k] && this.board[0][k] !== null){
+        return this.board[0][k];
       }
     }
 
     // DIAGONAL WINS
-    if (this.board.grid[0][0] == this.board.grid[1][1] && this.board.grid[0][0] == this.board.grid[2][2] && this.board.grid[1][1] !== null){
-      return this.board.grid[1][1];
+    if (this.board[0][0] == this.board[1][1] && this.board[0][0] == this.board[2][2] && this.board[1][1] !== null){
+      return this.board[1][1];
     }
-    if (this.board.grid[0][2] == this.board.grid[1][1] && this.board.grid[0][2] == this.board.grid[2][0] && this.board.grid[1][1] !== null){
-      return this.board.grid[1][1];
+    if (this.board[0][2] == this.board[1][1] && this.board[0][2] == this.board[2][0] && this.board[1][1] !== null){
+      return this.board[1][1];
     }
 
     return null;
@@ -89,7 +91,7 @@ var Game = Backbone.Model.extend({
     } else if (this.winner() === null && this.validSquare(a,b)) {
       // Checking to see whose turn it is.
 
-      this.board.grid[a][b] = this.currentPlayer().get('mark');
+      this.board[a][b] = this.currentPlayer().get('mark');
 
       if(this.winner()) {
         return "Congratulations, " + this.winner() + " has won!";
