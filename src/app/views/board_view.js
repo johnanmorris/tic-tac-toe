@@ -3,7 +3,7 @@ import $ from 'jquery';
 
 var BoardView = Backbone.View.extend({
   initialize: function(){
-    this.render();
+    console.log(this);
   },
 
   events: {
@@ -11,9 +11,12 @@ var BoardView = Backbone.View.extend({
   },
 
   playSquare: function(e){
-    // To click and play a square in a game of TTT. Need to find a way to pass in the id of the click element.
-    console.log("You've clicked the board");
-    console.log(e.currentTarget.id);
+    var square = $(e.currentTarget);
+    var firstVal = square.attr("id")[3];
+    var secondVal = square.attr("id")[5];
+    console.log(this);
+    // var playMark = this.model.currentPlayer().get("mark");
+    console.log("playSquare: " + firstVal + ", " + secondVal);
   },
 
   render: function() {

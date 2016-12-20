@@ -1,10 +1,14 @@
-import GameView from 'app/views/application';
+import GameView from 'app/views/game_view';
 import Game from 'app/models/game';
 import BoardView from 'app/views/board_view';
+import $ from 'jquery';
 
-var game = new Game();
 
-var appView = new GameView({
-  el: 'main',
-  model: game
+$(document).ready(function() {
+  var game = new Game();
+
+  var gameView = new GameView({
+    el: 'main',
+    model: game
+  });
 });

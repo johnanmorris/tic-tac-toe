@@ -96,11 +96,6 @@ var Game = Backbone.Model.extend({
       }
       this.toggleTurn();
     }
-    //
-    // console.log("BOARD");
-    // console.log(this.board.get('grid')[0]);
-    // console.log(this.board.get('grid')[1]);
-    // console.log(this.board.get('grid')[2]);
   }
 });
 

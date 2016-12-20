@@ -34,18 +34,18 @@ section #current-player {
   border: 1px dashed black;
 }
 
-#sq-1, #sq-4, #sq-7 {
+#sq-0-0, #sq-1-0, #sq-2-0 {
   border-left: 0;
 }
 
-#sq-3, #sq-6, #sq-9 {
+#sq-0-2, #sq-1-2, #sq-2-2 {
   border-right: 0;
 }
 
-#sq-1, #sq-2, #sq-3 {
+#sq-0-0, #sq-0-1, #sq-0-2 {
   border-top: 0;
 }
 
-#sq-7, #sq-8, #sq-9 {
+#sq-2-0, #sq-2-1, #sq-2-2 {
   border-bottom: 0;
 }
