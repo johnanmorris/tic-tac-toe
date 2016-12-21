@@ -46,7 +46,12 @@ var GameView = Backbone.View.extend({
     console.log(this.model.board[1]);
     console.log(this.model.board[2]);
 
-    console.log("played " + playMark + " at " + firstVal + ", " + secondVal);
+    if (this.model.winner()) {
+      // SEND WINNER DATA TO API
+      alert("Congratulations! The winner is " + this.model.winner() + "!");
+    } else if (!(this.model.winner()) && this.model.isFull()) {
+      alert("The game has ended in a tie.");      
+    }
   },
 
   startNewGame: function(e){
@@ -55,13 +60,6 @@ var GameView = Backbone.View.extend({
     this.clearBoard(e);
     this.render();
   },
-
-  displayWinner: function() {
-    if (this.model.winner()) {
-
-    }
-  }
-
 });
 
 export default GameView;

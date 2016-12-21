@@ -73,25 +73,18 @@ var Game = Backbone.Model.extend({
   },
 
   play: function(a,b){
-
-    // Error Handling of input type. Technically could be in one if-statement, but separated out if clear what each is looking for.
     if (typeof a !== "number" || typeof b !== "number" ){
-      throw new Error("Coordinates must be integer numbers between 0 and 2 inclusive");
+      throw new Error("Coordinates must be integers between 0 and 2 inclusive");
     } else if (a < 0 || a > 2 || b < 0 || b > 2){
-      throw new Error("Coordinates must be integer numbers between 0 and 2 inclusive");
+      throw new Error("Coordinates must be integers between 0 and 2 inclusive");
     } else if (a % 1 !== 0 || b % 1 !== 0){
-      throw new Error("Coordinates must be integer numbers between 0 and 2 inclusive");
-    }
-
-    if (this.winner()){
-      return this.winner();
-    } else if (this.validSquare(a,b) === false) {
-      return "Sorry, the square is already played, please pick another one";
-    } else if (this.winner() === null && this.validSquare(a,b)) {
-      // Checking to see whose turn it is.
-
+      throw new Error("Coordinates must be integers between 0 and 2 inclusive");
+    } else if (this.winner()) {
+      throw new Error("Game has already been won.");
+    } else if (!(this.validSquare(a, b))) {
+      throw new Error("Invalid square");
+    } else {
       this.board[a][b] = this.currentPlayer().get('mark');
-
       this.toggleTurn();
       this.trigger('change');
     }
