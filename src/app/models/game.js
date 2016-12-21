@@ -6,7 +6,6 @@ var Game = Backbone.Model.extend({
     this.playerOne = new Player({mark: "X", turn: true});
     this.playerTwo = new Player({mark: "O", turn: false});
     this.board = [ [null,null,null], [null,null,null], [null,null,null]];
-    console.log(this.board);
   },
 
   toggleTurn: function() {
@@ -29,7 +28,6 @@ var Game = Backbone.Model.extend({
 
   validSquare: function(a, b) {
     var square = this.board[a][b];
-//    console.log("SQUARE >>> " + square);
     if(square === null) {
       return true;
     } else {
@@ -49,7 +47,7 @@ var Game = Backbone.Model.extend({
   },
 
   winner: function(){
-    // FOR THE HORIZONTAL WIN - STILL TO DETERMINE IF WE CNA PUT THIS IN A LOOP VS HARD CODING.
+    // FOR THE HORIZONTAL WIN - STILL TO DETERMINE IF WE CAN PUT THIS IN A LOOP VS HARD CODING.
 
     for(var i = 0; i < this.board.length; i++){
       if (this.board[i][0] == this.board[i][1] && this.board[i][0] == this.board[i][2] && this.board[i][0] !== null){
@@ -86,7 +84,7 @@ var Game = Backbone.Model.extend({
     }
 
     if (this.winner()){
-      return "Sorry the game has already been won.";
+      return this.winner();
     } else if (this.validSquare(a,b) === false) {
       return "Sorry, the square is already played, please pick another one";
     } else if (this.winner() === null && this.validSquare(a,b)) {
@@ -94,12 +92,8 @@ var Game = Backbone.Model.extend({
 
       this.board[a][b] = this.currentPlayer().get('mark');
 
-      if(this.winner()) {
-        return "Congratulations, " + this.winner() + " has won!";
-      }
       this.toggleTurn();
       this.trigger('change');
-      console.log("play");
     }
   }
 });

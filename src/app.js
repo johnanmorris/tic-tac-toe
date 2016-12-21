@@ -1,6 +1,5 @@
 import GameView from 'app/views/game_view';
 import Game from 'app/models/game';
-import BoardView from 'app/views/board_view';
 import $ from 'jquery';
 
 
@@ -11,6 +10,5 @@ $(document).ready(function() {
     el: 'main',
     model: game
   });
-
 
 });

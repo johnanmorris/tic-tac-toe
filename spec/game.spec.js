@@ -161,14 +161,6 @@ describe("Game", function(){
       expect(game.playerTwo.get('turn')).toEqual(true);
     });
 
-    it("should announce when a player has won", function(){
-      game.play(0,0);
-      game.play(0,2);
-      game.play(1,1);
-      game.play(1,2);
-      expect(game.play(2,2)).toEqual("Congratulations, " + game.winner() + " has won!");
-    });
-
     it("should throw an error when a player plays a play out of range (0-2)", function(){
       expect(function(){game.play(2,3);}).toThrowError("Coordinates must be integer numbers between 0 and 2 inclusive");
       expect(function(){game.play(2,-1);}).toThrowError("Coordinates must be integer numbers between 0 and 2 inclusive");

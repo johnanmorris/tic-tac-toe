@@ -12,7 +12,7 @@
       <h1>Tic-Tac-Toe</h1>
     </header>
     <main>
-      <section id="current-player">
+      <section id="winner">
       </section>
 
       <div class="row">
@@ -34,7 +34,7 @@
               <td id="sq-2-0" class="square"></td>
               <td id="sq-2-1" class="square"></td>
               <td id="sq-2-2" class="square"></td>
-            </tr>            
+            </tr>
           </table>
           <button id="new-game" name="button" class="success button medium-3 medium-offset-2 columns">New Game</button>
         </section>
@@ -42,13 +42,7 @@
     </main>
 
     <script type="text/template" id="tmpl-winner">
-      <h2>Congratulations, <%- player > ! You've won!</h2>
-    </script>
-
-    <script type="text/template" id="tmpl-curr-player">
-      <!-- LOOK AT THIS LATER!!! -->
-      <!-- <h2>Current player: <%- player ></h2>
-      <h3>You are playing: <%- game.mark ></h3> -->
+      <!-- <h2>Congratulations, <%- this.winner() > ! You've won!</h2> -->
     </script>
 
 
