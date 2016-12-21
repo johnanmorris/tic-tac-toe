@@ -42,8 +42,8 @@ var Game = Backbone.Model.extend({
           return false;
         }
       }
-      return true;
     }
+    return true;
   },
 
   winner: function(){
@@ -68,6 +68,10 @@ var Game = Backbone.Model.extend({
     if (this.board[0][2] == this.board[1][1] && this.board[0][2] == this.board[2][0] && this.board[1][1] !== null){
       return this.board[1][1];
     }
+
+    // if (this.isFull()) {
+    //   return null;
+    // }
 
     return null;
   },

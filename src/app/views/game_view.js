@@ -50,12 +50,12 @@ var GameView = Backbone.View.extend({
       // SEND WINNER DATA TO API
       alert("Congratulations! The winner is " + this.model.winner() + "!");
     } else if (!(this.model.winner()) && this.model.isFull()) {
-      alert("The game has ended in a tie.");      
+      alert("The game has ended in a tie.");
     }
   },
 
   startNewGame: function(e){
-    // clears board and initiates new game
+    // clears board and initiates new game -- sort of;
     console.log("You've started a new game");
     this.clearBoard(e);
     this.render();
