@@ -11,4 +11,6 @@ $(document).ready(function() {
     el: 'main',
     model: game
   });
+
+
 });

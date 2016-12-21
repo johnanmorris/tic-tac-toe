@@ -6,6 +6,7 @@ var Game = Backbone.Model.extend({
     this.playerOne = new Player({mark: "X", turn: true});
     this.playerTwo = new Player({mark: "O", turn: false});
     this.board = [ [null,null,null], [null,null,null], [null,null,null]];
+    console.log(this.board);
   },
 
   toggleTurn: function() {
@@ -97,6 +98,8 @@ var Game = Backbone.Model.extend({
         return "Congratulations, " + this.winner() + " has won!";
       }
       this.toggleTurn();
+      this.trigger('change');
+      console.log("play");
     }
   }
 });

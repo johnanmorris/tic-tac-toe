@@ -15,8 +15,8 @@
       <section id="current-player">
       </section>
 
-      <section id="game">
-        <div class="row">
+      <div class="row">
+        <section id="game">
           <table id="board" class="medium-6 columns medium-offset-1">
             <tr>
               <td id="sq-0-0" class="square"></td>
@@ -37,8 +37,8 @@
             </tr>            
           </table>
           <button id="new-game" name="button" class="success button medium-3 medium-offset-2 columns">New Game</button>
-        </div>
-      </section>
+        </section>
+      </div>
     </main>
 
     <script type="text/template" id="tmpl-winner">
@@ -46,9 +46,15 @@
     </script>
 
     <script type="text/template" id="tmpl-curr-player">
-      <h2>Current player: <%- player ></h2>
-      <h3>You are playing: <%- game.mark ></h3>
+      <!-- LOOK AT THIS LATER!!! -->
+      <!-- <h2>Current player: <%- player ></h2>
+      <h3>You are playing: <%- game.mark ></h3> -->
     </script>
+
+
+    <script type="text/template" id="tmpl-board">
+    </script>
+
     <script src="/app.bundle.js" charset="utf-8"></script>
   </body>
 </html>

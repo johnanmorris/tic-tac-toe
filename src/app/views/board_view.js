@@ -7,7 +7,7 @@ var BoardView = Backbone.View.extend({
   },
 
   events: {
-    'click .square': 'playSquare'
+
   },
 
   playSquare: function(e){
