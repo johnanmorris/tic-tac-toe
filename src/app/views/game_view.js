@@ -8,8 +8,7 @@ var GameView = Backbone.View.extend({
     this.model.bind('change', this.render);
     this.listenTo(this.model, 'update', this.render);
     this.collection = options.collection;
-    this.collectionTemplate = _.template($('#tmpl-collection').html());
-    this.gameListElement = this.$('#game-list');
+    this.gameListElement = $('#game-hist');
   },
 
   render: function() {
@@ -22,10 +21,19 @@ var GameView = Backbone.View.extend({
       });
     });
 
-    // this.collection.forEach(function(game) {
-    //   console.log("GAMES: " + game.model);
-    //   // this.gameListElement.append(game.$el);
-    // }, this);
+    this.collection.fetch().done(function(data){
+      var gameUl = $('#game-hist');
+      gameUl.empty();
+      data.forEach(function(game){
+        console.log(game);
+        var date = new Date(game.played_at);
+        var formattedDate = date.getMonth() + "/" + date.getDate() + "/" + date.getFullYear() + " @ " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+
+        var gameLi = $('<li class="column"></li>');
+        gameLi.append(game.id + " (played " + formattedDate + " ): " + game.outcome);
+        gameUl.append(gameLi);
+      });
+    });
 
     this.delegateEvents();
     console.log("render!");

@@ -7,7 +7,6 @@ import GameCollection from 'app/collections/game_collection';
 $(document).ready(function() {
   var game = new Game();
   var gameCollection = new GameCollection();
-  gameCollection.fetch();
 
   var gameView = new GameView({
     el: 'main',

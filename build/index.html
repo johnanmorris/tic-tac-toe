@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="css/foundation.css"></link>
     <link rel="stylesheet" href="css/app.css"></link>
-    <link href="https://fonts.googleapis.com/css?family=Chewy" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Chewy|PT+Sans+Narrow" rel="stylesheet">
   </head>
   <body>
     <header>
@@ -39,19 +39,14 @@
           <button id="new-game" name="button" class="success button medium-3 medium-offset-2 columns">New Game</button>
         </section>
       </div>
-      <div class="row">
-        <section id="game-history">
+      <div>
           <h2>Past Games</h2>
-          <ul id="game-list">
+          <ul id="game-hist" class="row small-up-2 large-up-3">
 
           </ul>
         </section>
       </div>
     </main>
-
-    <script type="text/template" id="tmpl-collection">
-      <li><%- outcome %></li>
-    </script>
     <script src="/app.bundle.js" charset="utf-8"></script>
   </body>
 </html>

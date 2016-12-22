@@ -10,6 +10,10 @@ h1 {
   margin: 0 auto 0 auto;
 }
 
+#game-hist li {
+  list-style: none
+}
+
 table {
   margin: 0 auto 0 auto;
   /*width: 30%;*/
@@ -26,8 +30,12 @@ td {
   font-size: 2em;
 }
 
-body, h1, h2, h3 {
+h1, h2, h3, td {
   font-family: 'Chewy', cursive;
+}
+
+body {
+  font-family: 'PT Sans Narrow', sans-serif;
 }
 
 section #current-player {
