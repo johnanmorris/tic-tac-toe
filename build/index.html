@@ -47,6 +47,16 @@
         </section>
       </div>
     </main>
+
+    <script type="text/template" id="tmpl-game-hist">
+      <li class="column"><strong>Game <%- id %>: </strong>
+          <ul>
+            <li>Played on <%- date %></li>
+            <li>Winner: <strong><%- outcome %></strong>
+        </ul>
+      </li>
+    </script>
+
     <script src="/app.bundle.js" charset="utf-8"></script>
   </body>
 </html>
