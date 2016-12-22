@@ -2,10 +2,13 @@ import Backbone from 'backbone';
 import Player from 'app/models/player';
 
 var Game = Backbone.Model.extend({
+  urlRoot: 'http://localhost:3000/api/v1/games/',
+
   initialize: function(options){
     this.playerOne = new Player({mark: "X", turn: true});
     this.playerTwo = new Player({mark: "O", turn: false});
     this.board = [ [null,null,null], [null,null,null], [null,null,null]];
+    this.outcome = null;
   },
 
   toggleTurn: function() {
@@ -46,34 +49,57 @@ var Game = Backbone.Model.extend({
     return true;
   },
 
-  winner: function(){
-    // FOR THE HORIZONTAL WIN - STILL TO DETERMINE IF WE CAN PUT THIS IN A LOOP VS HARD CODING.
+  endGame: function(){
 
-    for(var i = 0; i < this.board.length; i++){
-      if (this.board[i][0] == this.board[i][1] && this.board[i][0] == this.board[i][2] && this.board[i][0] !== null){
-        return this.board[i][0];
+    this.board = [].concat.apply([], this.board);
+    for(var i = 0; i < this.board.length; i++) {
+      if (this.board[i] === null) {
+        this.board[i] = " ";
       }
     }
+    this.playerMarks = [this.playerOne.get('mark'), this.playerTwo.get('mark')];
+  },
+
+  winner: function(){
+    // FOR THE HORIZONTAL WIN
+    for(var i = 0; i < this.board.length; i++){
+      if (this.board[i][0] == this.board[i][1] && this.board[i][0] == this.board[i][2] && this.board[i][0] !== null){
+        this.outcome = this.board[i][0];
+        this.endGame();
+        return true;
+      }
+    }
+
     // VERTICAL WIN
     for(var k = 0; k < this.board[0].length; k++) {
       if (this.board[0][k] == this.board[1][k] && this.board[0][k] == this.board[2][k] && this.board[0][k] !== null){
-        return this.board[0][k];
+        this.outcome = this.board[0][k];
+        this.endGame();
+        return true;
       }
     }
 
     // DIAGONAL WINS
     if (this.board[0][0] == this.board[1][1] && this.board[0][0] == this.board[2][2] && this.board[1][1] !== null){
-      return this.board[1][1];
+      this.outcome = this.board[1][1];
+      this.endGame();
+      return true;
     }
+
     if (this.board[0][2] == this.board[1][1] && this.board[0][2] == this.board[2][0] && this.board[1][1] !== null){
-      return this.board[1][1];
+      this.outcome = this.board[1][1];
+      this.endGame();
+      return true;
     }
 
-    // if (this.isFull()) {
-    //   return null;
-    // }
-
-    return null;
+    else if (this.isFull() === true) {
+      this.outcome = 'draw';
+      this.endGame();
+      return true;
+    }
+    else {
+      return false;
+    }
   },
 
   play: function(a,b){

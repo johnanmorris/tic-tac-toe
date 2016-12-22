@@ -39,7 +39,19 @@
           <button id="new-game" name="button" class="success button medium-3 medium-offset-2 columns">New Game</button>
         </section>
       </div>
+      <div class="row">
+        <section id="game-history">
+          <h2>Past Games</h2>
+          <ul id="game-list">
+
+          </ul>
+        </section>
+      </div>
     </main>
+
+    <script type="text/template" id="tmpl-collection">
+      <li><%- outcome %></li>
+    </script>
     <script src="/app.bundle.js" charset="utf-8"></script>
   </body>
 </html>

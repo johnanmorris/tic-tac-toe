@@ -6,9 +6,14 @@ var GameView = Backbone.View.extend({
   initialize: function(options){
     _.bindAll(this, "render");
     this.model.bind('change', this.render);
+    this.listenTo(this.model, 'update', this.render);
+    this.collection = options.collection;
+    this.collectionTemplate = _.template($('#tmpl-collection').html());
+    this.gameListElement = this.$('#game-list');
   },
 
   render: function() {
+    // this.gameListElement.empty();
     this.model.board.forEach(function(row, i){
       row.forEach(function(cell, j){
         var squareID = "sq-" + i + "-" + j;
@@ -16,6 +21,11 @@ var GameView = Backbone.View.extend({
         $("#" + squareID).html(cell);
       });
     });
+
+    // this.collection.forEach(function(game) {
+    //   console.log("GAMES: " + game.model);
+    //   // this.gameListElement.append(game.$el);
+    // }, this);
 
     this.delegateEvents();
     console.log("render!");
@@ -48,8 +58,21 @@ var GameView = Backbone.View.extend({
 
     if (this.model.winner()) {
       // SEND WINNER DATA TO API
-      alert("Congratulations! The winner is " + this.model.winner() + "!");
+      var wonGame = {
+        board: this.model.board,
+        players: this.model.playerMarks,
+        outcome: this.model.outcome
+      };
+      console.log(wonGame);
+      this.collection.create(wonGame);
+      alert("Congratulations! The winner is " + this.model.outcome + "!");
     } else if (!(this.model.winner()) && this.model.isFull()) {
+      var tieGame = {
+        board: this.model.board,
+        players: this.model.playerMarks,
+        outcome: this.model.outcome
+      };
+      this.collection.create(tieGame);
       alert("The game has ended in a tie.");
     }
   },
