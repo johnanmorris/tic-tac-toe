@@ -9,6 +9,7 @@ var Game = Backbone.Model.extend({
     this.playerTwo = new Player({mark: "O", turn: false});
     this.board = [ [null,null,null], [null,null,null], [null,null,null]];
     this.outcome = null;
+    this.playerMarks = [this.playerOne.get('mark'), this.playerTwo.get('mark')];
   },
 
   toggleTurn: function() {
@@ -49,15 +50,13 @@ var Game = Backbone.Model.extend({
     return true;
   },
 
-  endGame: function(){
-
+  flattenBoard: function(){
     this.board = [].concat.apply([], this.board);
     for(var i = 0; i < this.board.length; i++) {
       if (this.board[i] === null) {
         this.board[i] = " ";
       }
     }
-    this.playerMarks = [this.playerOne.get('mark'), this.playerTwo.get('mark')];
   },
 
   winner: function(){
@@ -65,7 +64,7 @@ var Game = Backbone.Model.extend({
     for(var i = 0; i < this.board.length; i++){
       if (this.board[i][0] == this.board[i][1] && this.board[i][0] == this.board[i][2] && this.board[i][0] !== null){
         this.outcome = this.board[i][0];
-        this.endGame();
+        this.flattenBoard();
         return true;
       }
     }
@@ -74,7 +73,7 @@ var Game = Backbone.Model.extend({
     for(var k = 0; k < this.board[0].length; k++) {
       if (this.board[0][k] == this.board[1][k] && this.board[0][k] == this.board[2][k] && this.board[0][k] !== null){
         this.outcome = this.board[0][k];
-        this.endGame();
+        this.flattenBoard();
         return true;
       }
     }
@@ -82,20 +81,20 @@ var Game = Backbone.Model.extend({
     // DIAGONAL WINS
     if (this.board[0][0] == this.board[1][1] && this.board[0][0] == this.board[2][2] && this.board[1][1] !== null){
       this.outcome = this.board[1][1];
-      this.endGame();
+      this.flattenBoard();
       return true;
     }
 
     if (this.board[0][2] == this.board[1][1] && this.board[0][2] == this.board[2][0] && this.board[1][1] !== null){
       this.outcome = this.board[1][1];
-      this.endGame();
+      this.flattenBoard();
       return true;
     }
 
     else if (this.isFull() === true) {
       this.outcome = 'draw';
-      this.endGame();
-      return true;
+      this.flattenBoard();
+      return null;
     }
     else {
       return false;

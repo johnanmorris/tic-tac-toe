@@ -74,62 +74,83 @@ describe("Game", function(){
     });
   });
 
+  describe("flattenBoard", function(){
+    it("should flatten the board and replace nulls with spaces", function(){
+      game.board[0] = [null, "X", null];
+      game.board[1] = [null, "X", null];
+      game.board[2] = [null, "X", null];
+      game.flattenBoard();
+      expect(game.board.length).toEqual(9);
+      expect(game.board[0]).toEqual(" ");
+    });
+  });
+
   describe("winner", function(){
-    it("should return the proper winner for horizontal win in first row", function(){
+    it("should return true for horizontal win in first row and set the outcome", function(){
       game.board[0] = ["X","X","X"];
-      expect(game.winner()).toEqual("X");
+      expect(game.winner()).toEqual(true);
+      expect(game.outcome).toEqual("X");
     });
-    it("should return the proper winner for horizontal win in second row", function(){
+    it("should return true for horizontal win in second row and set the outcome", function(){
       game.board[1] = ["X","X","X"];
-      expect(game.winner()).toEqual("X");
+      expect(game.winner()).toEqual(true);
+      expect(game.outcome).toEqual("X");
     });
-    it("should return the proper winner for horizontal win in third row", function(){
+    it("should return true for horizontal win in third row and set the outcome", function(){
       game.board[2] = ["O","O","O"];
-      expect(game.winner()).toEqual("O");
+      expect(game.winner()).toEqual(true);
+      expect(game.outcome).toEqual("O");
     });
 
-    it("should return the proper winner for a vertical win in the first column", function(){
+    it("should return true for a vertical win in the first column and set the outcome", function(){
       game.board[0][0] = "O";
       game.board[0][1] = "O";
       game.board[0][2] = "O";
-      expect(game.winner()).toEqual("O");
+      expect(game.winner()).toEqual(true);
+      expect(game.outcome).toEqual("O");
     });
 
-    it("should return the proper winner for a vertical win in the second column", function(){
+    it("should return true for a vertical win in the second column and set the outcome", function(){
       game.board[1][0] = "O";
       game.board[1][1] = "O";
       game.board[1][2] = "O";
-      expect(game.winner()).toEqual("O");
+      expect(game.winner()).toEqual(true);
+      expect(game.outcome).toEqual("O");
     });
 
-    it("should return the proper winner for a vertical win in the third column", function(){
+    it("should return true for a vertical win in the third column and set the outcome", function(){
       game.board[2][0] = "X";
       game.board[2][1] = "X";
       game.board[2][2] = "X";
-      expect(game.winner()).toEqual("X");
+      expect(game.winner()).toEqual(true);
+      expect(game.outcome).toEqual("X");
     });
 
-    it("should return the proper winner for a left diagonal win", function(){
+    it("should return true for a left diagonal win and set the outcome", function(){
       game.board[0][0] = "X";
       game.board[1][1] = "X";
       game.board[2][2] = "X";
-      expect(game.winner()).toEqual("X");
+      expect(game.winner()).toEqual(true);
+      expect(game.outcome).toEqual("X");
     });
 
-    it("should return the proper winner for a right diagonal win", function(){
+    it("should return true for a right diagonal win and set the outcome", function(){
       game.board[0][2] = "O";
       game.board[1][1] = "O";
       game.board[2][0] = "O";
-      expect(game.winner()).toEqual("O");
+      expect(game.winner()).toEqual(true);
+      expect(game.outcome).toEqual("O");
     });
 
-    it("should return null if there is not yet a winner", function(){
-      expect(game.winner()).toEqual(null);
+    it("should return false if there is not yet a winner", function(){
+      expect(game.winner()).toEqual(false);
+      expect(game.outcome).toEqual(null);
     });
 
-    it("should return null if the entire game ends in a draw", function(){
+    it("should return null if the game ends in a draw and set the outcome to 'draw'", function(){
       game.board = [["X", "O", "X"],["O", "X", "O"],["O", "X", "O"]];
       expect(game.winner()).toEqual(null);
+      expect(game.outcome).toEqual("draw");
     });
   });
 
